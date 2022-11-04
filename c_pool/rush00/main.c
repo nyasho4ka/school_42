@@ -1,18 +1,18 @@
-#include "rush01.c"
+#include "rush02.c"
 
 int main()
 {
-    rush_1(5, 3);
+    rush_2(5, 3);
     ft_putchar('\n');
-    rush_1(5, 1);
+    rush_2(5, 1);
     ft_putchar('\n');
-    rush_1(1, 1);
+    rush_2(1, 1);
     ft_putchar('\n');
-    rush_1(1, 5);
+    rush_2(1, 5);
     ft_putchar('\n');
-    rush_1(4, 4);
+    rush_2(4, 4);
     ft_putchar('\n');
-    rush_1(2, 2);
+    rush_2(2, 2);
 
     return 0;
 }
