@@ -24,24 +24,23 @@ char convert_number_into_char(int mod)
 
 void print_hex_non_printable(char c)
 {
-    int hex[3] = {'0', '\0', '\0'};
+    int hex[3] = {'0', '0', '\0'};
     int char_num = (int)c;
 
     int mod;
     char curr_char;
 
-    int i = 0;
+    int i = 1;
     while (char_num != 0)
     {
         mod = char_num % 16;
         curr_char = convert_number_into_char(mod);
         hex[i] = curr_char;
         char_num = char_num / 16;
-        i++;
+        i--;
     }
      
     ft_putchar('\\');
-    ft_putchar('0');
     i = 0;
     while (hex[i])
     {
@@ -65,6 +64,7 @@ void ft_putstr_non_printable(char* str)
 
 int main()
 {
-    ft_putstr_non_printable("Hello\nMy Lady\t");
+    ft_putstr_non_printable("y\tu\v_s\ed\nf");
+    ft_putchar('\n');
     return 0;
 }
