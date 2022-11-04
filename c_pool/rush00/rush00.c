@@ -1,17 +1,17 @@
 #include <stdbool.h>
 #include "ft_putchar.c"
 
-bool is_corner(int x, int y, int max_x, int max_y)
+static bool is_corner(int x, int y, int max_x, int max_y)
 {
     return (x == 0 && y == 0) || (x == 0 && y == max_y) || (x == max_x && y == 0) || (x == max_x && y == max_y);
 }
 
-bool is_vertical_edge(int x, int max_x)
+static bool is_vertical_edge(int x, int max_x)
 {
     return x == 0 || x == max_x;
 }
 
-bool is_horizontal_edge(int y, int max_y)
+static bool is_horizontal_edge(int y, int max_y)
 {
     return y == 0 || y == max_y;
 }
