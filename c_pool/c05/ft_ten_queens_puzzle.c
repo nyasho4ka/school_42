@@ -22,15 +22,16 @@ int is_coerce(int column, int* busy)
     for (int row = 0; row < rows; row++)
     {
         int pos = is_pos_available(row, column, busy);
-        printf("BUSY: ");
-            for (int i = 0; i < rows; i++)
-                printf("%d ", busy[i]);
-        printf("column: %d, row: %d, is available: %d\n", column, row, pos);
         if (pos != -1)
         {
             busy[column] = pos;
             if (column == N_QUEENS - 1)
+            {
                 solutions++;
+                for (int i = 0; i < rows; i++)
+                    printf("%d", busy[i]);
+                printf("\n");
+            }
             else 
                 solutions += is_coerce(column + 1, busy);
         }
