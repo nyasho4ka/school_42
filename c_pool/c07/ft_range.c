@@ -8,16 +8,16 @@ int* ft_range(int min, int max)
     
     int number_count = max - min;
     int* range = malloc(sizeof(int) * number_count);
-    for (int i = min; i < max; i++)
+    for (int i = 0; i < number_count; i++)
     {
-        range[i] = i;
+        range[i] = i + min;
     }
     return range;
 }
 
 int main()
 {
-    int min = 0;
+    int min = 50;
     int max = 100;
     int* range = ft_range(min, max);
     for (int i = 0; i < max - min; i++)
