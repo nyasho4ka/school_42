@@ -130,8 +130,6 @@ int get_value(int checked_value, int row, int column, int** puzzle)
     int is_right = is_right_available(checked_value, row, column, puzzle);
     int is_up = is_up_available(checked_value, row, column, puzzle);
     int is_down = is_down_available(checked_value, row, column, puzzle);
-    printf("is_left: %d, is_right: %d, is_up: %d, is_down: %d ", is_left, is_right, is_up, is_down);
-    printf("checked_value: %d, row: %d, column: %d\n", checked_value, row, column);
     if (!is_left || !is_right || !is_up || !is_down)
         return -1;
     
@@ -155,12 +153,10 @@ int is_solved(int row, int column, int** puzzle)
 
             if (column == 4)
             {
-                printf("GO DEEPER\n");
                 success = is_solved(row + 1, 1, puzzle);
             }
             else
             {
-                printf("GO NEXT COLUMN\n");
                 success = is_solved(row, column + 1, puzzle);
             }
 
@@ -174,23 +170,23 @@ int is_solved(int row, int column, int** puzzle)
 void ft_fill_board(int** puzzle)
 {
     puzzle[0][1] = 3;
-    puzzle[0][2] = 1;
-    puzzle[0][3] = 3;
-    puzzle[0][4] = 2;
+    puzzle[0][2] = 2;
+    puzzle[0][3] = 1;
+    puzzle[0][4] = 3;
 
-    puzzle[5][1] = 2;
-    puzzle[5][2] = 2;
-    puzzle[5][3] = 1;
-    puzzle[5][4] = 3;
+    puzzle[5][1] = 1;
+    puzzle[5][2] = 3;
+    puzzle[5][3] = 3;
+    puzzle[5][4] = 2;
 
-    puzzle[1][0] = 2;
+    puzzle[1][0] = 3;
     puzzle[2][0] = 2;
-    puzzle[3][0] = 1;
-    puzzle[4][0] = 3;
+    puzzle[3][0] = 4;
+    puzzle[4][0] = 1;
 
     puzzle[1][5] = 2;
-    puzzle[2][5] = 1;
-    puzzle[3][5] = 3;
+    puzzle[2][5] = 2;
+    puzzle[3][5] = 1;
     puzzle[4][5] = 2;
 }
 
