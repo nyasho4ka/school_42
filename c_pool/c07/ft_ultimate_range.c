@@ -26,12 +26,11 @@ int ft_ultimate_range(int** range, int min, int max)
 
 int main()
 {
-    int* range = NULL;
-    int** ult_range = &range;
-    int range_size = ft_ultimate_range(ult_range, 50, 100);
+    int* range;
+    int range_size = ft_ultimate_range(&range, 50, 100);
     for (int i = 0; i < range_size; i++)
     {
-        printf("%d ", ult_range[0][i]);
+        printf("%d ", range[i]);
     }
     printf("\n");
     return 0;
