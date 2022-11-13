@@ -14,7 +14,9 @@ int ft_strlen(char* str)
 
 char* ft_strcopy(char* str, int size)
 {
-    char* str_copy = (char *)malloc(sizeof(char) * size + 1);
+    char* str_copy;
+    if ((str_copy = (char *)malloc(sizeof(char) * size + 1)) == (void*)(0))
+        return (void*)(0);
 
     int i = 0;
     while (i <= size)
@@ -28,10 +30,12 @@ char* ft_strcopy(char* str, int size)
 t_stock_str create_stock_str(char* str)
 {
     int size = ft_strlen(str);
+    char *str_copy = ft_strcopy(str, size);
+
     t_stock_str stock_str = {
         size,
         str,
-        ft_strcopy(str, size),
+        str_copy,
     };
     return stock_str;
 }
@@ -46,6 +50,10 @@ t_stock_str *ft_strs_to_tab(int ac, char **av)
     while (i < ac)
     {
         stock_str_tab[i] = create_stock_str(av[i]);
+
+        if (stock_str_tab[i].copy)
+            return (void*)(0);
+
         i++;
     }
 
