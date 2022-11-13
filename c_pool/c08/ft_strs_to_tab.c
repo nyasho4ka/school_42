@@ -51,7 +51,7 @@ t_stock_str *ft_strs_to_tab(int ac, char **av)
     {
         stock_str_tab[i] = create_stock_str(av[i]);
 
-        if (stock_str_tab[i].copy)
+        if (stock_str_tab[i].copy == (void*)(0))
             return (void*)(0);
 
         i++;
