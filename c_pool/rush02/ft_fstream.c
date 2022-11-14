@@ -5,19 +5,11 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "ft.h"
 
 const int MAX_CHAR_COUNT = 128;
 
-typedef struct fstream {
-    int fd;
-    int curr_nl_cursor;
-    int new_line_size;
-    int curr_char;
-    int max_char;
-    char* stream;
-} t_fstream;
-
-void read_next_chunk(t_fstream* fstream)
+static void read_next_chunk(t_fstream* fstream)
 {
     fstream->curr_char = 0;
     fstream->curr_nl_cursor = 0;
@@ -38,7 +30,7 @@ t_fstream* create_fstream(int fd)
     return fstream;
 }
 
-char ft_getc(t_fstream* fstream)
+static char ft_getc(t_fstream* fstream)
 {
     char c = fstream->stream[fstream->curr_char];
     if (c == -1)
@@ -53,7 +45,7 @@ char ft_getc(t_fstream* fstream)
     return c;
 }
 
-int try_find_new_line_pos(t_fstream* fstream)
+static int try_find_new_line_pos(t_fstream* fstream)
 {
     int nl_cursor = fstream->curr_nl_cursor;
     while (nl_cursor < MAX_CHAR_COUNT && fstream->stream[nl_cursor] != '\n' && fstream->stream[nl_cursor] != -1)
@@ -70,7 +62,7 @@ char* ft_getline(t_fstream* fstream, int* status)
     char* line;
     int nl_pos = try_find_new_line_pos(fstream);
     // fill the line
-    if ((line = malloc(sizeof(char) * fstream->new_line_size)) == (void*)(0))
+    if ((line = malloc(sizeof(char) * (fstream->new_line_size + 1))) == (void*)(0))
         return (void*)(0);
 
     int i = 0;
@@ -79,13 +71,15 @@ char* ft_getline(t_fstream* fstream, int* status)
         line[i] = ft_getc(fstream);
         i++;
     } 
+    line[i] = '\0';
+
     // if didn't find new line sign
     while (nl_pos == MAX_CHAR_COUNT)
     {
         int prev_new_line_size = fstream->new_line_size;
         char* new_line;
         nl_pos = try_find_new_line_pos(fstream);
-        if ((new_line = malloc(sizeof(char) * fstream->new_line_size)) == (void*)(0))
+        if ((new_line = malloc(sizeof(char) * (fstream->new_line_size + 1))) == (void*)(0))
             return (void*)(0);
 
         // copy old line and free
@@ -102,30 +96,11 @@ char* ft_getline(t_fstream* fstream, int* status)
             new_line[i] = ft_getc(fstream);
             i++;
         }
+        new_line[i] = '\0';
         line = new_line;
     }
     fstream->new_line_size = 0;
     *status = ft_getc(fstream);
     return line;
 }
-
-int main(int argc, char **argv)
-{
-    (void)argc;
-    char* file_path = argv[1];
-    int fd = open(file_path, O_RDONLY);
-    t_fstream* fstream = create_fstream(fd);
-    int status = 0;
-    char* line = NULL;
-
-    while (status != -1)
-    {
-        line = ft_getline(fstream, &status);
-        printf("%s\n", line);
-        free(line);
-    }
-
-    free(fstream);
-}
-
 #endif
