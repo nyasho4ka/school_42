@@ -9,7 +9,7 @@ t_numbers_dict* create_dict(int size)
     t_numbers_dict* dict = (t_numbers_dict*)malloc(sizeof(t_numbers_dict));
     dict->curr_elem = 0;
     dict->size = size;
-    t_dict_elem** elements = (t_dict_elem**)malloc(sizeof(t_dict_elem*));
+    t_dict_elem** elements = (t_dict_elem**)malloc(sizeof(t_dict_elem*) * size);
     dict->elements = elements;
     return dict;
 }
@@ -19,7 +19,7 @@ static char* fill_elem(char* line, char** number, char** repr)
     int pos = 0;
     while (line[pos])
     {
-        if (line[pos] <= '0' || line[pos] >= '9')
+        if (line[pos] < '0' || line[pos] > '9')
             break;
         pos++;
     }
@@ -86,5 +86,18 @@ void print_dict(t_numbers_dict* dict)
         t_dict_elem* elem = dict->elements[i];
         printf("%s : %s\n", elem->number, elem->repr);
     }
+}
+
+void free_dict(t_numbers_dict* dict)
+{
+    for (int i = 0; i < dict->curr_elem; i++)
+    {
+        t_dict_elem* elem = dict->elements[i];
+        free(elem->number);
+        free(elem->repr);
+        free(elem);
+    }
+    free(dict->elements);
+    free(dict);
 }
 #endif
