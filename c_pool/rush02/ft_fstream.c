@@ -103,4 +103,14 @@ char* ft_getline(t_fstream* fstream, int* status)
     *status = ft_getc(fstream);
     return line;
 }
+
+int ft_strlen(char *line)
+{
+    int i = 0;
+    while (line[i])
+    {
+        i++;
+    }
+    return i;
+}
 #endif

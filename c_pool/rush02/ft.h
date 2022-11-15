@@ -23,8 +23,12 @@ typedef struct numbers_dict {
 
 t_fstream* create_fstream(int fd);
 char* ft_getline(t_fstream* fstream, int* status);
+int ft_strlen(char *line);
+
 t_numbers_dict* create_dict(int size);
 int add_elem(t_numbers_dict* dict, char* line);
 void print_dict(t_numbers_dict* dict);
 void free_dict(t_numbers_dict* dict);
+
+char* ft_convert(char* line, t_numbers_dict* dict);
 #endif
