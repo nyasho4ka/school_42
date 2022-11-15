@@ -29,10 +29,7 @@ int main(int argc, char **argv)
             add_elem(dict, line);
     }
 
-    char* converted_number;
-    if ((converted_number = ft_convert(value, dict)) == (void*)(0))
-        return -1;
-    printf("%s\n", converted_number);
+    printf("%s\n", ft_convert(value, dict));
     free_dict(dict);
     return (0);
 }
