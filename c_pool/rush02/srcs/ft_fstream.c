@@ -1,11 +1,8 @@
-#ifndef __FT_FSTREAM__
-#define __FT_FSTREAM__
-#define MEM_ERROR -2
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "ft.h"
+#include "ft_fstream.h"
 
 const int MAX_CHAR_COUNT = 128;
 
@@ -103,14 +100,3 @@ char* ft_getline(t_fstream* fstream, int* status)
     *status = ft_getc(fstream);
     return line;
 }
-
-int ft_strlen(char *line)
-{
-    int i = 0;
-    while (line[i])
-    {
-        i++;
-    }
-    return i;
-}
-#endif

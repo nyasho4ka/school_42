@@ -1,8 +1,6 @@
-#ifndef __FT_NUMBERS_DICT__
-#define __FT_NUMBERS_DICT__
 #include <stdlib.h>
 #include <stdio.h>
-#include "ft.h"
+#include "ft_numbers_dict.h"
 
 t_numbers_dict* create_dict(int size)
 {
@@ -100,4 +98,3 @@ void free_dict(t_numbers_dict* dict)
     free(dict->elements);
     free(dict);
 }
-#endif

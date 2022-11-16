@@ -2,7 +2,10 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "ft.h"
+#include "ft_fstream.h"
+#include "ft_numbers_dict.h"
+#include "ft_converter.h"
+#include "ft_str.h"
 
 // void ft_convert_to_written_value(char* value, char* dict_path)
 // {
