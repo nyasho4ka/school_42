@@ -56,4 +56,8 @@ void ft_tail(int file_descriptor, int bytes_count)
         for (int i = 0; i < count; i++)
             ft_putchar(buffers[1][i]);
     }
+    
+    free(buffers[0]);
+    free(buffers[1]);
+    free(buffers);
 }
