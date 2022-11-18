@@ -62,7 +62,7 @@ int main()
     printf("AFTER SORTING:\n");
     for (int i = 0; i < 10; i++)
         printf("i: %d, string: %s\n", i, strings[i]);
-
+    printf("\n");
     strings[0] = "hello";
     strings[1] = "world";
     strings[2] = "how are you?";
