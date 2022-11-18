@@ -16,7 +16,7 @@ void ft_print_list(t_list* list)
 void ft_list_reverse(t_list** begin_list)
 {
     t_list* curr = *begin_list;
-    if (!curr)
+    if (!curr || !curr->next)
         return;
 
     t_list* tmp = (void*)(0);
