@@ -11,3 +11,8 @@ t_list *ft_create_elem(void *data)
     }
     return elem;
 }
+
+int main()
+{
+    return (0);
+}

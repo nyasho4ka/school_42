@@ -2,8 +2,10 @@
 #define __FT_LIST__
 
 typedef struct s_list {
-    t_list *next;
+    struct s_list *next;
     void* data;
 } t_list;
+
+t_list *ft_create_elem(void *data);
 
 #endif
