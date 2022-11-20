@@ -31,16 +31,7 @@ void ft_sorted_list_insert(t_list** begin_list, void* data, int(*cmp)())
 
     while (*ptr && (*cmp)(data, (*ptr)->data) > 0)
     {
-        if (ft_strcmp(data, "rofl") == 0)
-        {
-            printf("ptr: %p\n", ptr);
-            printf("*ptr: %p\n", *ptr);
-            printf("(*ptr)->next: %p\n", (*ptr)->next);
-            printf("&((*ptr)->next): %p\n", &((*ptr)->next));
-        }
         ptr = &((*ptr)->next);
-        if (ft_strcmp(data, "rofl") == 0)
-            printf("*ptr: %p\n", *ptr);
     }
     t_list* new_elem = ft_create_elem(data);
     tmp = *ptr;
