@@ -72,21 +72,25 @@ int main(int argc, char** argv)
         tab_params->line_count, tab_params->empty_char, tab_params->obstacle_char, tab_params->fill_char);
     
     char** tab = (char**)malloc(sizeof(char*) * tab_params->line_count);
+    int line_size = 0;
     for (int i = 0; i < tab_params->line_count; i++)
-    {
+    {   
         tab[i] = ft_getline(stream, &status);
+        if (!line_size)
+            line_size = ft_get_line_size(tab[i]);
         if (status == -1 && i < tab_params->line_count - 1)
-            break;
+            return 127;
     }
+    printf("line_size: %d\n", line_size);
 
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < tab_params->line_count; i++)
     {
         printf("%s\n", tab[i]);
     }
     printf("---------------------------\n");
-    ft_draw_bsq(tab, 9, 27);
+    ft_draw_bsq(tab, tab_params->line_count, line_size);
 
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < tab_params->line_count; i++)
     {
         printf("%s\n", tab[i]);
     }

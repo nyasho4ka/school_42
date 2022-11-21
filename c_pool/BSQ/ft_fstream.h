@@ -12,5 +12,5 @@ typedef struct fstream {
 
 t_fstream* create_fstream(int fd);
 char* ft_getline(t_fstream* fstream, int* status);
-
+int ft_get_line_size(char* line);
 #endif

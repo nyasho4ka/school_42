@@ -54,6 +54,14 @@ static int try_find_new_line_pos(t_fstream* fstream)
     return nl_cursor;
 }
 
+int ft_get_line_size(char* line)
+{
+    int i = 0;
+    while (line[i])
+        i++;
+    return i;
+}
+
 char* ft_getline(t_fstream* fstream, int* status)
 {
     char* line;
