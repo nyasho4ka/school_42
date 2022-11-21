@@ -1,5 +1,9 @@
 #include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include <stdlib.h>
+#include "ft_fstream.h"
+#include "ft_tab_params.h"
 
 int is_square_fit(char** tab, int left_x, int left_y, int size, int rows, int cols)
 {
@@ -54,74 +58,32 @@ void ft_draw_bsq(char** tab, int rows, int cols)
     }
 }
 
-int main()
+int main(int argc, char** argv)
 {
-    char* first = (char*)malloc(sizeof(char) * 27);
-    char* first_line = "...........................";
-    for (int i = 0; i < 27; i++)
+    if (argc == 1)
+        return (0);
+
+    char* file_name = argv[1];
+    int fd = open(file_name, O_RDONLY);
+    t_fstream* stream = create_fstream(fd);
+    int status = 0;
+    t_tab_params* tab_params = ft_parse_params(ft_getline(stream, &status));
+    printf("line_count: %d, empty_char: %c, obstacle_char: %c, fill_char: %c\n", 
+        tab_params->line_count, tab_params->empty_char, tab_params->obstacle_char, tab_params->fill_char);
+    
+    char** tab = (char**)malloc(sizeof(char*) * tab_params->line_count);
+    for (int i = 0; i < tab_params->line_count; i++)
     {
-        first[i] = first_line[i];
-    }
-    char* second = (char*)malloc(sizeof(char) * 27);
-    char* second_line = "....o......................";
-    for (int i = 0; i < 27; i++)
-    {
-        second[i] = second_line[i];
-    }
-    char* third = (char*)malloc(sizeof(char) * 27);
-    char* third_line = "............o..............";
-    for (int i = 0; i < 27; i++)
-    {
-        third[i] = third_line[i];
-    }
-    char* fourth = (char*)malloc(sizeof(char) * 27);
-    char* fourth_line = "...........................";
-    for (int i = 0; i < 27; i++)
-    {
-        fourth[i] = fourth_line[i];
-    }
-    char* fifth = (char*)malloc(sizeof(char) * 27);
-    char* fifth_line = "....o......................";
-    for (int i = 0; i < 27; i++)
-    {
-        fifth[i] = fifth_line[i];
-    }
-    char* sixth = (char*)malloc(sizeof(char) * 27);
-    char* sixth_line = "...............o...........";
-    for (int i = 0; i < 27; i++)
-    {
-        sixth[i] = sixth_line[i];
-    }
-    char* seventh = (char*)malloc(sizeof(char) * 27);
-    char* seventh_line = "...........................";
-    for (int i = 0; i < 27; i++)
-    {
-        seventh[i] = seventh_line[i];
-    }
-    char* eighth = (char*)malloc(sizeof(char) * 27);
-    char* eighth_line = "......o..............o.....";
-    for (int i = 0; i < 27; i++)
-    {
-        eighth[i] = eighth_line[i];
-    }
-    char* ninth = (char*)malloc(sizeof(char) * 27);
-    char* ninth_line = "..o.......o................";
-    for (int i = 0; i < 27; i++)
-    {
-        ninth[i] = ninth_line[i];
+        tab[i] = ft_getline(stream, &status);
+        if (status == -1 && i < tab_params->line_count - 1)
+            break;
     }
 
-    char** tab = (char**)malloc(sizeof(char*) * 9);
-    tab[0] = first;
-    tab[1] = second;
-    tab[2] = third;
-    tab[3] = fourth;
-    tab[4] = fifth;
-    tab[5] = sixth;
-    tab[6] = seventh;
-    tab[7] = eighth;
-    tab[8] = ninth;
-
+    for (int i = 0; i < 9; i++)
+    {
+        printf("%s\n", tab[i]);
+    }
+    printf("---------------------------\n");
     ft_draw_bsq(tab, 9, 27);
 
     for (int i = 0; i < 9; i++)
